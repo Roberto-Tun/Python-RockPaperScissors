@@ -1,16 +1,19 @@
-import random
-from select import select #importing the random module
+import random #importing the random module
+
+UsersScore = 0 #keep track of the user's score
+
+AIScore = 0 #keep track of the AI's score
 
 #function that prints a random action
 def rpsselection():
     Actions = ["Rock", "Paper", "Scissors"] #list of actions
-    AiSelection = random.choice(Actions) #using the random module to randomly select and an action from the list
-    return AiSelection #when fucntion is called returns the random action selected
+    AI_Selection = random.choice(Actions) #randomly selects an action form the list
+    return AI_Selection #returns the random action selected
 
 def insult():
-    Insults = ["Your Ass", "Nice try kid", "Bozo", "ZZZZZ"]
-    Insult_selected = random.choice(Insults)
-    return Insult_selected
+    Insults = ["Your Ass", "Eat shit", "Bozo", "ZZZZZ"] #list of insults
+    Insult_selected = random.choice(Insults) #randomly selects an insult from the list
+    return Insult_selected #returns the random insult selected
 
 print("---------------------------------------------")
 print("--------Welcome to Rock Paper Scissors-------") #welcome ui
@@ -18,47 +21,65 @@ print("---------------------------------------------")
 
 Play = input("Would you like to play: Enter 'Y' or 'N' ") #asking the user if they would like to play
 
-while Play.upper() == "Y":
+while Play.upper() == "Y": #while loop to let the game continue
     print("------------Moves-------------")
     print("1 | Rock")
-    print("2 | Paper")
+    print("2 | Paper") #different moves ui
     print("3 | Scissors")
-    UserAction = int(input("Enter your Move: "))
 
-    Selection = rpsselection()
+    UserAction = int(input("Enter your Move: ")) #asking the user for their move
 
-    if UserAction == 1:
-        if Selection == "Paper":
+    AISelection = rpsselection() #setting the ai's action in a variable
+
+    if UserAction == 1: #if checking the users move
+        if AISelection == "Paper": #if checking the AI's move
             print("Your Move: \n", "Rock")
-            print("AI's Move: \n", Selection)
-            print(insult())
-        elif Selection == "Scissors" or Selection == "Rock":
+            print("AI's Move: \n", AISelection)
+            print(insult()) #insult function is called
+            AIScore += 1 #add one to the AI score
+        elif AISelection == "Scissors" or AISelection == "Rock":
             print("Your Move: \n", "Rock")
-            print("AI's Move: \n", Selection)
+            print("AI's Move: \n", AISelection)
             print("GG")
+            if AISelection == "Scissors": #checks if the user won and adds 1 to the score board
+                UsersScore += 1
     elif UserAction == 2:
-        if Selection == "Scissors":
+        if AISelection == "Scissors":
             print("Your Move: \n", "Paper")
-            print("AI's Move: \n", Selection)
-            print(insult())
-        elif Selection == "Rock" or Selection == "Paper":
+            print("AI's Move: \n", AISelection)
+            print(insult()) #insult function is called
+            AIScore += 1 #add one to the AI score
+        elif AISelection == "Rock" or AISelection == "Paper":
             print("Your Move: \n", "Paper")
-            print("AI's Move: \n", Selection)
+            print("AI's Move: \n", AISelection)
             print("GG")
+            if AISelection == "Rock": #checks if the user won and adds 1 to the score board
+                UsersScore += 1
     elif UserAction == 3:
-        if Selection == "Rock":
+        if AISelection == "Rock":
             print("Your Move: \n", "Scissors")
-            print("AI's Move: \n", Selection)
-            print(insult())
-        elif Selection == "Paper" or Selection == "Scissors":
+            print("AI's Move: \n", AISelection)
+            print(insult()) #insult function is called
+            AIScore += 1 #add one to the AI score
+        elif AISelection == "Paper" or AISelection == "Scissors":
             print("Your Move: \n", "Scissors")
-            print("AI's Move: \n", Selection)
+            print("AI's Move: \n", AISelection)
             print("GG")
+            if AISelection == "Paper": #checks if the user won and adds 1 to the score board
+                UsersScore += 1
     else:
         print("Invalid Input")
 
-    Play = input("Would you like to continue playing: Enter 'Y' or 'N' ")
+    Play = input("Would you like to continue playing: Enter 'Y' or 'N' ") #checking if the user would like to continue
 
-else:
-    quit()
+else: #prints the scores and ends game
+    print("Your Score: \n", UsersScore)
+    print("AI's Score: \n", AIScore)
+    if AIScore > UsersScore:
+        print("Your Booty")
+    elif UsersScore > AIScore:
+        print("Good Game")
+    else:
+        print("Nice")
+    quit() #exits the program
 
