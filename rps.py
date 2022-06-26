@@ -61,5 +61,4 @@ while Play.upper() == "Y":
 
 else:
     quit()
-insult()
 
